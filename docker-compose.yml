@@ -7,11 +7,12 @@ services:
     build: .
     ports:
       - ${PORT}:${PORT}
-    depends_on: postgres
+    depends_on: [postgres]
     volumes:
       - .:/usr/src/app
   postgres:
     image: postgres:15.1
+    container_name: database
     logging:
       driver: none
     environment:
