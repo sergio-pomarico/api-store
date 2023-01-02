@@ -1,12 +1,19 @@
-import express, { Application } from 'express';
 import * as dotenv from 'dotenv';
-import router from './routes';
 
-const app: Application = express();
+import { AppDataSource } from './database/db';
+import app from './app';
+
 dotenv.config();
 
-app.use('/api/v1', router);
+async function main() {
+  try {
+    await AppDataSource.initialize();
+    app.listen(process.env.PORT, () =>
+      console.info(`🚀 server run on port ${process.env.PORT}`),
+    );
+  } catch (err) {
+    console.error(err);
+  }
+}
 
-app.listen(process.env.PORT, () =>
-  console.log(`🚀 server run on port ${process.env.PORT}`),
-);
+main();
