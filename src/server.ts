@@ -1,6 +1,5 @@
-import express, { Application } from 'express';
-
-import router from './routes';
+import express, { Application, Router } from 'express';
+import { UserRouter } from './routes/user';
 
 export class Server {
   public app: Application = express();
@@ -10,8 +9,12 @@ export class Server {
     this.port = port;
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
-    this.app.use('/api/v1', router);
+    this.app.use('/api/v1', this.routers());
     this.listen();
+  }
+
+  routers(): Router[] {
+    return [new UserRouter().router];
   }
 
   public listen() {
