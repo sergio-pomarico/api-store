@@ -1,12 +1,14 @@
 import express, { Application, Router } from 'express';
+import { ConfigServer } from './config/config';
 import { UserRouter } from './routes/user';
 
-export class Server {
+export class Server extends ConfigServer {
   public app: Application = express();
   private port: number;
 
-  constructor(port: number) {
-    this.port = port;
+  constructor() {
+    super();
+    this.port = this.getPropertyAsNumber('PORT');
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use('/api/v1', this.routers());
