@@ -6,26 +6,22 @@ export abstract class ConfigServer {
     dotenv.config();
   }
 
-  public getEnvironmetProperty(key: string) {
+  public getEnvProperty(key: string) {
     return process.env[key];
   }
 
-  public getPropertyAsNumber(key: string): number {
-    return Number(this.getEnvironmetProperty(key));
-  }
-
-  public get env(): string {
-    return this.getEnvironmetProperty('NODE_ENV')?.trim() ?? 'development';
+  public getEnvPropertyAsNumber(key: string): number {
+    return Number(this.getEnvProperty(key));
   }
 
   public get databaseConfig(): DataSourceOptions {
     return {
       type: 'postgres',
       host: 'database',
-      port: this.getPropertyAsNumber('DB_PORT'),
-      username: this.getEnvironmetProperty('DB_USER'),
-      password: this.getEnvironmetProperty('DB_PASSWORD'),
-      database: this.getEnvironmetProperty('DB_NAME'),
+      port: this.getEnvPropertyAsNumber('DB_PORT'),
+      username: this.getEnvProperty('DB_USER'),
+      password: this.getEnvProperty('DB_PASSWORD'),
+      database: this.getEnvProperty('DB_NAME'),
       synchronize: true,
       logging: true,
     };
