@@ -1,6 +1,6 @@
 import express, { Application, Router } from 'express';
 import { DataSource } from 'typeorm';
-import { ConfigServer } from './config/config';
+import { ConfigServer } from './typing/config.server';
 import { UserRouter } from './routes/user';
 
 export class Server extends ConfigServer {
