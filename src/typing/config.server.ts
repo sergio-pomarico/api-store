@@ -24,6 +24,7 @@ export abstract class ConfigServer {
       database: this.getEnvProperty('DB_NAME'),
       synchronize: true,
       logging: true,
+      entities: [__dirname + '/../**/*.entity{.ts,.js}'],
     };
   }
 }
