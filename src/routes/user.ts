@@ -1,4 +1,4 @@
-import { BaseRouter } from './router';
+import { BaseRouter } from '../typing/base.router';
 import { UserController } from '../controllers/user';
 
 export class UserRouter extends BaseRouter<UserController> {
