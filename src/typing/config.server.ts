@@ -1,9 +1,10 @@
 import * as dotenv from 'dotenv';
-import { DataSourceOptions } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
 
 export abstract class ConfigServer {
   constructor() {
     dotenv.config();
+    this.appDataSource = new DataSource(this.databaseConfig);
   }
 
   public getEnvProperty(key: string) {
@@ -13,6 +14,8 @@ export abstract class ConfigServer {
   public getEnvPropertyAsNumber(key: string): number {
     return Number(this.getEnvProperty(key));
   }
+
+  public appDataSource: DataSource;
 
   public get databaseConfig(): DataSourceOptions {
     return {

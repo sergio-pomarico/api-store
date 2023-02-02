@@ -1,5 +1,4 @@
 import express, { Application, Router } from 'express';
-import { DataSource } from 'typeorm';
 import { ConfigServer } from './typing/config.server';
 import { UserRouter } from './routes/user';
 
@@ -23,8 +22,7 @@ export class Server extends ConfigServer {
 
   async connect(): Promise<void> {
     try {
-      const AppDataSource: DataSource = new DataSource(this.databaseConfig);
-      await AppDataSource.initialize();
+      await this.appDataSource.initialize();
     } catch (error) {
       console.error(error);
     }
