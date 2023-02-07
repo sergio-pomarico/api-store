@@ -1,18 +1,10 @@
-import * as dotenv from 'dotenv';
 import { DataSource, DataSourceOptions } from 'typeorm';
+import { BaseConfig } from './base.config';
 
-export abstract class ConfigServer {
+export abstract class DatabaseConfig extends BaseConfig {
   constructor() {
-    dotenv.config();
+    super();
     this.appDataSource = new DataSource(this.databaseConfig);
-  }
-
-  public getEnvProperty(key: string) {
-    return process.env[key];
-  }
-
-  public getEnvPropertyAsNumber(key: string): number {
-    return Number(this.getEnvProperty(key));
   }
 
   public appDataSource: DataSource;

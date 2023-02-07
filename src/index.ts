@@ -1,8 +1,8 @@
 import express, { Application, Router } from 'express';
-import { ConfigServer } from './typing/config.server';
+import { DatabaseConfig } from './typing/database.config';
 import { UserRouter } from './routes/user';
 
-export class Server extends ConfigServer {
+export class Server extends DatabaseConfig {
   public app: Application = express();
   private port: number;
 
